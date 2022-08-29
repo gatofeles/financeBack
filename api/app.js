@@ -31,6 +31,8 @@ app.use((req, res, next)=>{
 //routes
 app.use('/transactions', transactionsRouter);
 app.use('/users', usersRouter);
+app.use('/',(req, res, next)=>{
+    res.status('200').send("Welcome to finace app REST API")});
 
 //error handling
 app.use((req, res, next)=>{
