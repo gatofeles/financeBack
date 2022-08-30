@@ -30,7 +30,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm install
-    - run: npm start
     
     - uses: actions/checkout@v3
       with:
@@ -40,7 +39,13 @@ jobs:
       with:
         dotnet-version: 6.x
     - run: dotnet build tests
-    - run: dotnet test tests
+    
+    - run: |
+        npm start &
+        sleep 2
+        dotnet test tests
+        kill -9 `lsof -i:3000 -t`
+
     
     
   
