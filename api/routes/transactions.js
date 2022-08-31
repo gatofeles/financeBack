@@ -24,7 +24,7 @@ router.get('/:tranId', auth, async(req, res, next)=>{
     }   
 });
 
-router.get('/:userId', auth,  async(req, res, next)=>{
+router.get('/trans/:userId', auth,  async(req, res, next)=>{
     const response = await Transaction.getTransByUserId(req.params.userId);
     if(!response[0]){
         
