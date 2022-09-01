@@ -19,8 +19,12 @@ const tranValidSchema  = Joi.object({
 
     description: Joi.string()
     .min(5)
+    .max(255),
+
+    date: Joi.string()
+    .min(5)
     .max(255)
-   
+
 });
 
 const transactionSchema = mongoose.Schema({
@@ -79,22 +83,19 @@ function validateTransaction(tran){
 }
 
 async function createTran(tran){
-    var date = new Date();
     //Validar a entrada
     const result = validateTransaction(tran);
     if(!result[0]){
      return result;
     }
     //criar instancia
-
     let newTran = new Transaction(tran);
-    newTran.date = date.toLocaleString("en-US");
     newTran._id = new mongoose.Types.ObjectId();
 
     //salvar na base de dados
-    
     tranResult = await newTran.save();
     console.log(tranResult);
+    
     return [true,tranResult];
 }
 
