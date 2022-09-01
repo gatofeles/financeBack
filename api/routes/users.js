@@ -29,8 +29,7 @@ router.post('/login', async(req, res, next)=>{
 
 router.post('/', async(req, res, next)=>{
     const response = await User.createUser(req.body);
-    if(!response[0]){
-        
+    if(!response[0]){   
         res.status(400).send(response[1]);
     }
     else{

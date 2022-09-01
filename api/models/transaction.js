@@ -46,7 +46,13 @@ const transactionSchema = mongoose.Schema({
         minlength:5,
         maxlength:255
     },
-    date: Date
+    date: {
+        type:String,
+        default:"No Date",
+        minlength:5,
+        maxlength:255
+        
+    }
 
 });
 
@@ -73,6 +79,7 @@ function validateTransaction(tran){
 }
 
 async function createTran(tran){
+    var date = new Date();
     //Validar a entrada
     const result = validateTransaction(tran);
     if(!result[0]){
@@ -81,7 +88,7 @@ async function createTran(tran){
     //criar instancia
 
     let newTran = new Transaction(tran);
-    newTran.date = new Date().toUTCString();
+    newTran.date = date.toLocaleString("en-US");
     newTran._id = new mongoose.Types.ObjectId();
 
     //salvar na base de dados
