@@ -34,7 +34,7 @@ router.get('/trans/:userId', auth,  async(req, res, next)=>{
         res.status(404).send(response[1]);
     }
     else{
-        res.status(200).send(response[1]);
+        res.status(200).send({expense:response[1]});
     }
 });
 
