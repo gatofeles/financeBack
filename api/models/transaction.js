@@ -48,13 +48,15 @@ const transactionSchema = mongoose.Schema({
         type:String,
         default:"No Description",
         minlength:5,
-        maxlength:255
+        maxlength:255,
+        required:true,
     },
     date: {
         type:String,
         default:"No Date",
         minlength:5,
-        maxlength:255
+        maxlength:255,
+        required:true
         
     }
 
@@ -95,7 +97,7 @@ async function createTran(tran){
     //salvar na base de dados
     tranResult = await newTran.save();
     console.log(tranResult);
-    
+
     return [true,tranResult];
 }
 
