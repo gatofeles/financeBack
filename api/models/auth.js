@@ -80,8 +80,12 @@ async function registerAuth(credentials){
             return [false, "Login was Unsuccesfull."];
         }
         const token = jwt.sign({id:user._id}, process.env.JWT);
+        const unserInfo = {
+            userId: user._id,
+            token: token
+        }
         console.log(token);
-        return [true, token];
+        return [true, unserInfo];
     }
 
     return [false, "Login was Unsuccesfull."];
